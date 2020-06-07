@@ -12,7 +12,18 @@ class itemsControllers {
                 image_url: `http://localhost:3333/uploads/${item.image}`,
             };
         });
-        return res.json({serializedItems});
+        return res.json(serializedItems);
     }
+
+    async indexDelete(req:Request, res:Response) {
+        const items = await knex('items').select('*');
+        const deleteItems = items.map(item => {
+            knex('items')
+            .where('id', '*')
+            .del()
+            
+        });
+        return res.json(deleteItems); 
+       }
 }
 export default itemsControllers;
